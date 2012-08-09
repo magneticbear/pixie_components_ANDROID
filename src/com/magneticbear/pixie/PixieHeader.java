@@ -51,7 +51,7 @@ public class PixieHeader {
     	int blueData = Color.blue(pixelData);
     	
     	// Create 'true' value by converting from base 256
-    	int trueValue = blueData + (greenData * (256)) + (redData * (256 * 25));
+    	int trueValue = blueData + (greenData * (256)) + (redData * (256 * 256));
     	
     	// Return the value as an int
     	return trueValue;
