@@ -1,0 +1,27 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top" >
+
+    <Button
+        android:id="@+id/debug_button"
+        android:onClick="onClick_debug_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:padding="16dp"
+        android:text="@string/debug_button_text" />
+
+    <TextView
+        android:id="@+id/debug_output_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/debug_button"
+        android:layout_alignParentLeft="true"
+        android:gravity="left"
+        android:padding="16dp"
+        android:text="@string/welcome_to_pixie_text" />
+
+</RelativeLayout>
