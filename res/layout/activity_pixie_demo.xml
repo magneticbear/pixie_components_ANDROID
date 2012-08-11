@@ -5,10 +5,11 @@
     android:gravity="top" >
 
     <com.magneticbear.pixie.PixieAnimator
-        android:id="@+id/pixieAnimator2"
+        android:id="@+id/pixieAnimator1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/demo_with_tickto" />
+        android:layout_marginTop="179dp"
+        android:src="@drawable/anim_sample_fat" />
 
 </RelativeLayout>
