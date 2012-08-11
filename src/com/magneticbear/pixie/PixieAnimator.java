@@ -1,16 +1,17 @@
 package com.magneticbear.pixie;
 
-import com.magneticbear.pixiedemo.R;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
-import android.view.View;
+import android.view.View.MeasureSpec;
+import android.widget.ImageView;
 
-public class PixieComponent extends View {
+public class PixieAnimator extends ImageView {
 
 	public PixieHeader header;
 	public Bitmap 	   pixieSheet;
@@ -19,31 +20,37 @@ public class PixieComponent extends View {
 	public int 		   currentFrameTickTo;
 	public Rect 	   drawingSourceRect;
 	public Rect 	   drawingDestRect;
-
 	
-	public PixieComponent(Context context, Bitmap PixieSheet) {
+	public PixieAnimator(Context context) {
 		super(context);
+		init();
+	}
+	public PixieAnimator(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		init();
+	}
+	public PixieAnimator(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		init();
+	}
+	
+	private void init() {
+		// Convert to bitmap for easy access
+		pixieSheet = ((BitmapDrawable)this.getDrawable()).getBitmap();
+		// Read header data
+		header = PixieHeader.ReadHeaderFromBitmap(pixieSheet);
 		
 		// Initialize rects so we don't create them every frame (save allocations)
 		drawingSourceRect = new Rect();
 		drawingDestRect   = new Rect();
 		
-		SetPixieSheet(PixieSheet);
-	}
-	
-	private void SetPixieSheet(Bitmap PixieSheet) {
-		pixieSheet 		   = PixieSheet;
-		header 			   = PixieHeader.ReadHeaderFromBitmap(pixieSheet);
+		// Setup frame data
 		currentFrame       = 0;
 		currentFrameTick   = 0;
-		currentFrameTickTo = 20;
+		currentFrameTickTo = 3;
 		
+		// Set sousrce rect to initial frame
 		setSourceRectToCurrentFrame();
-	}
-	
-	@Override
-	protected void onFinishInflate(){
-		super.onFinishInflate();
 	}
 	
 	@Override
@@ -68,7 +75,7 @@ public class PixieComponent extends View {
 
 		int width;
 		int height;
-		
+
 		switch(MeasureSpec.getMode(widthMeasureSpec)){
 			default:
 			case MeasureSpec.UNSPECIFIED:
@@ -116,25 +123,17 @@ public class PixieComponent extends View {
 		this.setMeasuredDimension(width, height);
 		
 		// Build dest rect
-		//drawingDestRect.left   = this.getLeft();
-		//drawingDestRect.top    = this.getTop();
-		//drawingDestRect.right  = drawingDestRect.left + width;
-		//drawingDestRect.bottom = drawingDestRect.top  + height;
+		drawingDestRect.left   = 0;
+		drawingDestRect.top    = 0;
+		drawingDestRect.right  = width;
+		drawingDestRect.bottom = height;
 	}
-	
-	
 	@Override
-	protected void onSizeChanged (int w, int h, int oldw, int oldh) {
-		// This is called during layout when the size of this view has changed. If you were just 
-		// added to the view hierarchy, you're called with the old values of 0.
-	}
-	
-	@Override
-	protected void onDraw (Canvas canvas) {
-		// Blit
+    protected void onDraw(Canvas canvas) {
+		// Blit current frame of animation
 		canvas.drawBitmap(pixieSheet, drawingSourceRect, drawingDestRect, null);
 		
-		// Have we been on this frame for enough calls?
+		// Have we been on this frame for enough draw calls?
 		currentFrameTick++;
 		if(currentFrameTick >= currentFrameTickTo) {
 			// We have!
@@ -150,8 +149,13 @@ public class PixieComponent extends View {
 			setSourceRectToCurrentFrame();
 		}
 		
-		// Mark invalid for redraw
-		invalidate();		
+		// Mark invalid for redraw (we use this as a faux-update cycle)
+		// 		Note: Normally MVC dictates we separate interests of drawing and updating.
+		//			  However the slow nature of mobile means we may receive 5 or 6 true updates on our thread
+		//			  before we receive even one draw call. To combat this, animations can only move forward during
+		//			  their own draw cycle.
+		//		tl;dr: why update an animation if its not being drawn, thats why we update here using invalidate to ensure we get another draw
+		invalidate();	
 	}
 	
 	private void setSourceRectToCurrentFrame() {
@@ -174,11 +178,12 @@ public class PixieComponent extends View {
 		int frame_y_index = (int) (Math.floor((double)(FrameIndex) / (double)(header.info_FrameCountAcross)));
 		int frame_x_index = FrameIndex % header.info_FrameCountAcross;
 		
-		// Build and set rect
+		// Build and set source rect
 		drawingSourceRect.left   = x_header_offset + (frame_x_index * header.info_FrameWidth);
 		drawingSourceRect.top    = y_header_offset + (frame_y_index * header.info_FrameHeight);
 		drawingSourceRect.right  = x_header_offset + (frame_x_index * header.info_FrameWidth)  + header.info_FrameWidth;
 		drawingSourceRect.bottom = y_header_offset + (frame_y_index * header.info_FrameHeight) + header.info_FrameHeight;
 	}
+	
 
 }

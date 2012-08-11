@@ -15,12 +15,27 @@ public class PixieHeader {
 		PixieHeader header = new PixieHeader(PixieSheet);
 		return header;
 	}
+	public static PixieHeader CreateEmptyHeader() {
+		PixieHeader header = new PixieHeader(null);
+		return header;
+	}
 	private PixieHeader(Bitmap PixieSheet) {
+		// Create empty header
+		if(PixieSheet == null){
+			info_FrameWidth 	  = 50;
+			info_FrameHeight      = 50;
+			info_FrameCountTotal  = 1;
+			info_FrameCountAcross = 1;
+			info_FrameCountDown   = 1;
+		}
+		// Create packed header
+		else {
 		info_FrameWidth  	  = readFrameWidth(PixieSheet);
 		info_FrameHeight      = readFrameHeight(PixieSheet);
 		info_FrameCountTotal  = readFrameCountTotal(PixieSheet);
 		info_FrameCountAcross = readFrameCountAcross(PixieSheet);
 		info_FrameCountDown   = readFrameCountDown(PixieSheet);
+		}
 	}
 	
 	private int readFrameWidth(Bitmap PixieSheet) {
