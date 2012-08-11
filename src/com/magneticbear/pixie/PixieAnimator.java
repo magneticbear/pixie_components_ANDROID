@@ -47,9 +47,9 @@ public class PixieAnimator extends ImageView {
 		// Setup frame data
 		currentFrame       = 0;
 		currentFrameTick   = 0;
-		currentFrameTickTo = 3;
+		currentFrameTickTo = header.info_FrameTickTo;
 		
-		// Set sousrce rect to initial frame
+		// Set source rect to initial frame
 		setSourceRectToCurrentFrame();
 	}
 	

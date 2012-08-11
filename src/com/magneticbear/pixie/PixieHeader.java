@@ -10,6 +10,7 @@ public class PixieHeader {
 	public int info_FrameCountTotal;
 	public int info_FrameCountAcross;
 	public int info_FrameCountDown;	
+	public int info_FrameTickTo;
 	
 	public static PixieHeader ReadHeaderFromBitmap(Bitmap PixieSheet){
 		PixieHeader header = new PixieHeader(PixieSheet);
@@ -27,6 +28,7 @@ public class PixieHeader {
 			info_FrameCountTotal  = 1;
 			info_FrameCountAcross = 1;
 			info_FrameCountDown   = 1;
+			info_FrameTickTo      = 10;
 		}
 		// Create packed header
 		else {
@@ -35,6 +37,7 @@ public class PixieHeader {
 		info_FrameCountTotal  = readFrameCountTotal(PixieSheet);
 		info_FrameCountAcross = readFrameCountAcross(PixieSheet);
 		info_FrameCountDown   = readFrameCountDown(PixieSheet);
+		info_FrameTickTo 	  = readFrameTickTo(PixieSheet);
 		}
 	}
 	
@@ -52,6 +55,9 @@ public class PixieHeader {
 	}
 	private int readFrameCountDown(Bitmap PixieSheet) {
 		return readIntAtPixel(0, 4, PixieSheet);
+	}
+	private int readFrameTickTo(Bitmap PixieSheet) {
+		return readIntAtPixel(0, 5, PixieSheet);
 	}
 	private int readIntAtPixel(int X, int Y, Bitmap SourceBitmap){
 		return readTrueValueAtPixel(X, Y, SourceBitmap);
