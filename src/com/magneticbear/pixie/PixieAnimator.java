@@ -3,12 +3,9 @@ package com.magneticbear.pixie;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
-import android.view.View.MeasureSpec;
 import android.widget.ImageView;
 
 public class PixieAnimator extends ImageView {
@@ -20,6 +17,8 @@ public class PixieAnimator extends ImageView {
 	public int 		   currentFrameTickTo;
 	public Rect 	   drawingSourceRect;
 	public Rect 	   drawingDestRect;
+	
+	public boolean 	   isPlaying;
 	
 	public PixieAnimator(Context context) {
 		super(context);
@@ -51,6 +50,9 @@ public class PixieAnimator extends ImageView {
 		
 		// Set source rect to initial frame
 		setSourceRectToCurrentFrame();
+		
+		// Set to initially playing
+		isPlaying = true;
 	}
 	
 	@Override
@@ -133,20 +135,23 @@ public class PixieAnimator extends ImageView {
 		// Blit current frame of animation
 		canvas.drawBitmap(pixieSheet, drawingSourceRect, drawingDestRect, null);
 		
-		// Have we been on this frame for enough draw calls?
-		currentFrameTick++;
-		if(currentFrameTick >= currentFrameTickTo) {
-			// We have!
-			// Reset ticker
-			currentFrameTick = 0;
-			
-			// Move to next frame
-			currentFrame++;
-			// Loop at end
-			if(currentFrame >= header.info_FrameCountTotal) currentFrame = 0;
-			
-			// Update source rect to coincide with frame change
-			setSourceRectToCurrentFrame();
+		// We only update the frame jog if isPlaying == true
+		if(isPlaying) {
+			// Have we been on this frame for enough draw calls?
+			currentFrameTick++;
+			if(currentFrameTick >= currentFrameTickTo) {
+				// We have!
+				// Reset ticker
+				currentFrameTick = 0;
+				
+				// Move to next frame
+				currentFrame++;
+				// Loop at end
+				if(currentFrame >= header.info_FrameCountTotal) currentFrame = 0;
+				
+				// Update source rect to coincide with frame change
+				setSourceRectToCurrentFrame();
+			}
 		}
 		
 		// Mark invalid for redraw (we use this as a faux-update cycle)
@@ -185,5 +190,72 @@ public class PixieAnimator extends ImageView {
 		drawingSourceRect.bottom = y_header_offset + (frame_y_index * header.info_FrameHeight) + header.info_FrameHeight;
 	}
 	
-
+	public void SetTickTo(int TickTo) {
+		// Tick to must be >= 1
+		if(TickTo >= 1) {
+			currentFrameTick   = 0;
+			currentFrameTickTo = TickTo;
+		}
+		else {
+			throw new Error("TickTo in SetTickTo must be >= 1.");
+		}
+	}
+	public void SetTickTo_FastestPossible() {
+		SetTickTo(1);
+	}
+	public void SetTickTo_FiveTicks() {
+		SetTickTo(5);
+	}
+	public void SetTickTo_TenTicks() {
+		SetTickTo(10);
+	}
+	public void SetTickTo_TwentyTicks() {
+		SetTickTo(20);
+	}
+	public void SetTickTo_FiftyTicks() {
+		SetTickTo(50);
+	}
+	public void SetTickTo_HundredTicks() {
+		SetTickTo(100);
+	}
+	public void Play() {
+		isPlaying = true;
+	}
+	public void Stop() {
+		isPlaying = false;
+		currentFrameTick = 0;
+	}
+	public void GoToFrameIndex(int FrameIndex) {
+		setSourceRectToFrame(FrameIndex);
+		currentFrameTick = 0;
+	}
+	public void GoToFrameByScalar(float Scalar) {
+		// Wtf is a scalar? A percent value without unit!
+		// This value must be inclusively top and bottom between 0 and 1
+		if(Scalar >= 0 && Scalar <= 1) {
+			// Yay good values, no one dies today (:
+			
+			// So lets figure out what frame that is
+			int frameIndexByScalar = (int)((float)(header.info_FrameCountTotal - 1) * Scalar);
+			
+			// Go there!
+			GoToFrameIndex(frameIndexByScalar);
+			
+			// Peace
+			return;
+		}
+		else{
+			// You can't go to 110% or -20% or NaN% or inf% or "my string"%
+			// If you did that, this error will catch you like a safety net,
+			// like a safety net made of electric eels telling you to go fix
+			// your shit.
+			throw new Error("Scalar in GoToFrameByScalar must be (inclusively) between 0 and 1.");
+		}
+	}
+	public void GoToStart() {
+		GoToFrameIndex(0);
+	}
+	public void GoToEnd() {
+		GoToFrameIndex(header.info_FrameCountTotal - 1);
+	}
 }
