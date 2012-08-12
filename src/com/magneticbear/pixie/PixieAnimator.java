@@ -163,16 +163,19 @@ public class PixieAnimator extends ImageView {
 		invalidate();	
 	}
 	
-	private void setSourceRectToCurrentFrame() {
+	protected void setSourceRectToCurrentFrame() {
 		setSourceRectToFrame(currentFrame); 
 	}
-	private void setSourceRectToFrame(int FrameIndex) {
+	protected void setSourceRectToFrame(int FrameIndex) {
 		// Ensure frame is within limits
 		if(FrameIndex >= header.info_FrameCountTotal)
 		{
 			// Out of bounds
-			assert(false);
+			throw new Error("Trying to setSourceRectToFrame to a frame index that is out of bounds!");
 		}
+		
+		// Update current frame
+		currentFrame = FrameIndex;
 		
 		// Currently pixie uses the first vertical row of pixels as it's header stream
 		// which means when we grab frames we need to offset past that
@@ -225,7 +228,7 @@ public class PixieAnimator extends ImageView {
 		isPlaying = false;
 		currentFrameTick = 0;
 	}
-	public void GoToFrameIndex(int FrameIndex) {
+	public void GoToFrameByIndex(int FrameIndex) {
 		setSourceRectToFrame(FrameIndex);
 		currentFrameTick = 0;
 	}
@@ -239,7 +242,7 @@ public class PixieAnimator extends ImageView {
 			int frameIndexByScalar = (int)((float)(header.info_FrameCountTotal - 1) * Scalar);
 			
 			// Go there!
-			GoToFrameIndex(frameIndexByScalar);
+			GoToFrameByIndex(frameIndexByScalar);
 			
 			// Peace
 			return;
@@ -253,9 +256,9 @@ public class PixieAnimator extends ImageView {
 		}
 	}
 	public void GoToStart() {
-		GoToFrameIndex(0);
+		GoToFrameByIndex(0);
 	}
 	public void GoToEnd() {
-		GoToFrameIndex(header.info_FrameCountTotal - 1);
+		GoToFrameByIndex(header.info_FrameCountTotal - 1);
 	}
 }

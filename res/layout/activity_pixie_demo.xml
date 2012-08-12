@@ -13,19 +13,19 @@
         android:src="@drawable/anim_sample_fat" />
 
     <com.magneticbear.pixie.PixieAnimator
-        android:id="@+id/pixieAnimator2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/circle_indicator_blue" />
-
-    <com.magneticbear.pixie.PixieAnimator
         android:id="@+id/pixieAnimator3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/circle_indicator_yellow" />
+
+    <com.magneticbear.pixie.PixieEaseControlAnimator
+        android:id="@+id/pixieEaseControlAnimator1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/circle_indicator_blue" />
 
 </RelativeLayout>
