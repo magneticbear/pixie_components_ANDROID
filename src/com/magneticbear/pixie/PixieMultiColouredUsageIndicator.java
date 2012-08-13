@@ -114,7 +114,7 @@ public class PixieMultiColouredUsageIndicator extends PixieUsageIndicator {
 		layer_blue.onDraw(canvas);
 		
 		/*
-		 DEMO MODE UNCOMMENT THIS TO HAVE RANDOM EASE TOS UPON COMPLETION
+		 //DEMO MODE UNCOMMENT THIS TO HAVE RANDOM EASE TOS UPON COMPLETION
 		if(!isFading) {
 			int Min = COLOR_RED;
 			int Max = COLOR_BLUE;

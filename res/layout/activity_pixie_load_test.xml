@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/rygb_usage_frames" />
+
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/pixieMultiColouredUsageIndicator1"
+        android:src="@drawable/rygb_usage_frames" />
+
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pixieMultiColouredUsageIndicator1"
+        android:layout_toLeftOf="@+id/pixieMultiColouredUsageIndicator2"
+        android:src="@drawable/rygb_usage_frames" />
+
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pixieMultiColouredUsageIndicator2"
+        android:layout_below="@+id/pixieMultiColouredUsageIndicator2"
+        android:src="@drawable/rygb_usage_frames" />
+
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pixieMultiColouredUsageIndicator3"
+        android:layout_toLeftOf="@+id/pixieMultiColouredUsageIndicator4"
+        android:src="@drawable/rygb_usage_frames" />
+
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pixieMultiColouredUsageIndicator4"
+        android:layout_below="@+id/pixieMultiColouredUsageIndicator4"
+        android:src="@drawable/rygb_usage_frames" />
+
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pixieMultiColouredUsageIndicator5"
+        android:layout_toLeftOf="@+id/pixieMultiColouredUsageIndicator6"
+        android:src="@drawable/rygb_usage_frames" />
+
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pixieMultiColouredUsageIndicator6"
+        android:layout_below="@+id/pixieMultiColouredUsageIndicator6"
+        android:src="@drawable/rygb_usage_frames" />
+
+</RelativeLayout>
