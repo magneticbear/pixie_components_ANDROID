@@ -79,9 +79,8 @@
         android:id="@+id/pixieMultiColouredUsageIndicator1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_0"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="49dp"
+        android:layout_alignLeft="@+id/pixieEaseControlAnimator1"
+        android:layout_alignParentTop="true"
         android:src="@drawable/rygb_usage_frames" />
 
     </RelativeLayout>

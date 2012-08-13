@@ -18,6 +18,8 @@ public class PixieMultiColouredUsageIndicator extends PixieUsageIndicator {
 	 *                     ::YELLOW 0->100
 	 *                     ::GREEN  0->100
 	 *                     ::BLUE   0->100
+	 *                     
+	 *                     where RED.frameCount == YELLOW.frameCount == GREEN.frameCount == BLUE.frameCount
 	 */
 	
 	public static final int COLOR_RED    = 0;
@@ -86,8 +88,14 @@ public class PixieMultiColouredUsageIndicator extends PixieUsageIndicator {
 		layer_green.GoToFrameByIndex(layer_green_stride_scalar_start);
 		layer_blue.GoToFrameByIndex(layer_blue_stride_scalar_start);
 		
+		// Start all alphas at 0
+		super.paint.setAlpha(0);
+		layer_yellow.paint.setAlpha(0);
+		layer_green.paint.setAlpha(0);
+		layer_blue.paint.setAlpha(0);
 		
-		SetUsagePercent(0.5f, COLOR_BLUE);
+		// Start usage at 0.0f blue
+		SetUsagePercent(0.0f, COLOR_BLUE);
 	}
 
 	@Override
