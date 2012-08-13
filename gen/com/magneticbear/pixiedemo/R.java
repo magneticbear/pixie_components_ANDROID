@@ -16,6 +16,7 @@ public final class R {
         public static final int circle_indicator_yellow=0x7f020002;
         public static final int ic_action_search=0x7f020003;
         public static final int ic_launcher=0x7f020004;
+        public static final int rygb_usage_frames=0x7f020005;
     }
     public static final class id {
         public static final int btn_0=0x7f070003;
@@ -23,9 +24,10 @@ public final class R {
         public static final int btn_15=0x7f070004;
         public static final int btn_50=0x7f070005;
         public static final int btn_85=0x7f070006;
-        public static final int menu_settings=0x7f070008;
+        public static final int menu_settings=0x7f070009;
         public static final int pixieAnimator1=0x7f070000;
         public static final int pixieEaseControlAnimator1=0x7f070002;
+        public static final int pixieMultiColouredUsageIndicator1=0x7f070008;
         public static final int textView1=0x7f070001;
     }
     public static final class layout {

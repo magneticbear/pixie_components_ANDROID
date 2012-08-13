@@ -239,7 +239,7 @@ public class PixieAnimator extends ImageView {
 			// Yay good values, no one dies today (:
 			
 			// So lets figure out what frame that is
-			int frameIndexByScalar = (int)((float)(header.info_FrameCountTotal - 1) * Scalar);
+			int frameIndexByScalar = (int)((float)(header.info_FrameCountTotal - 1.0f) * Scalar);
 			
 			// Go there!
 			GoToFrameByIndex(frameIndexByScalar);

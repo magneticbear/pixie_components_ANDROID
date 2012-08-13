@@ -2,6 +2,7 @@ package com.magneticbear.pixie;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 
 public class PixieEaseControlAnimator extends PixieAnimator {
@@ -34,6 +35,14 @@ public class PixieEaseControlAnimator extends PixieAnimator {
 	public int 	   ease_tick;
 	public int 	   ease_tickTo;
 	public int 	   ease_style;
+	
+	public boolean isFading;
+	public Paint   paint;
+	public int 	   alpha_ease_target;
+	public int 	   alpha_ease_start;
+	public int 	   alpha_ease_tick;
+	public int 	   alpha_ease_tickTo;
+	public int     alpha_ease_style;
 
 	public PixieEaseControlAnimator(Context context) {
 		super(context);
@@ -49,14 +58,110 @@ public class PixieEaseControlAnimator extends PixieAnimator {
 	}
 	private void easerInit() {
 		isEasing = false;
+		isFading = false;
+		
+		// Setup the paint object (used for alpha)
+		alpha_ease_target = 255;
+		paint = new Paint();
+		paint.setAlpha(alpha_ease_target);
 	}
-
+	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		// Blit current frame of animation
-		canvas.drawBitmap(pixieSheet, drawingSourceRect, drawingDestRect, null);
+		canvas.drawBitmap(pixieSheet, drawingSourceRect, drawingDestRect, paint);
 
-		// We only update if we are easing
+		// We only update alpha if we are fading
+		if(isFading) {
+			// Create alpha target holder
+			int alpha_target;
+			
+			// Calculate delta
+			int alpha_delta = alpha_ease_target - alpha_ease_start;
+			
+			// Update fade
+			switch(ease_style) {
+			case EASE_STYLE_CIRCULAR_IN:
+				alpha_target = (int)PixieEasers.CIRCULAR_IN(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_CIRCULAR_OUT:
+				alpha_target = (int)PixieEasers.CIRCULAR_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_CUBIC_IN:
+				alpha_target = (int)PixieEasers.CUBIC_IN(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_CUBIC_IN_OUT:
+				alpha_target = (int)PixieEasers.CUBIC_IN_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_CUBIC_OUT:
+				alpha_target = (int)PixieEasers.CUBIC_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_EXPONENTIAL_IN:
+				alpha_target = (int)PixieEasers.EXPONENTIAL_IN(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_EXPONENTIAL_IN_OUT:
+				alpha_target = (int)PixieEasers.EXPONENTIAL_IN_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_EXPONENTIAL_OUT:
+				alpha_target = (int)PixieEasers.EXPONENTIAL_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_LINEAR:
+				alpha_target = (int)PixieEasers.LINEAR(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUADRATIC_IN:
+				alpha_target = (int)PixieEasers.QUADRATIC_IN(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUADRATIC_IN_OUT:
+				alpha_target = (int)PixieEasers.QUADRATIC_IN_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUADRATIC_OUT:
+				alpha_target = (int)PixieEasers.QUADRATIC_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUARTIC_IN:
+				alpha_target = (int)PixieEasers.QUARTIC_IN(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUARTIC_IN_OUT:
+				alpha_target = (int)PixieEasers.QUARTIC_IN_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUARTIC_OUT:
+				alpha_target = (int)PixieEasers.QUARTIC_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUINTIC_IN:
+				alpha_target = (int)PixieEasers.QUINTIC_IN(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUINTIC_IN_OUT:
+				alpha_target = (int)PixieEasers.QUINTIC_IN_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_QUINTIC_OUT:
+				alpha_target = (int)PixieEasers.QUINTIC_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_SIN_IN:
+				alpha_target = (int)PixieEasers.SIN_IN(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_SIN_IN_OUT:
+				alpha_target = (int)PixieEasers.SIN_IN_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			case EASE_STYLE_SIN_OUT:
+				alpha_target = (int)PixieEasers.SIN_OUT(alpha_ease_tick, alpha_ease_tickTo, alpha_ease_start, alpha_delta);
+				break;
+			default:
+				throw new Error("Trying to do an ease in a PixieEaseControlAnimator with an unknown ease style, please use the constants provided in the class to choose an ease style (:");
+			}
+
+			// Set alpha
+ 			this.paint.setAlpha(alpha_target);
+
+			// Update tick
+			alpha_ease_tick++;
+
+			// Check for completion
+			if(alpha_ease_tick > alpha_ease_tickTo) {
+				// Complete!
+				isFading = false;
+			}
+		}
+		
+		// We only update the frame number if we are easing
 		if(isEasing) {
 
 			// Create a variable to hold the frame we should be on
@@ -159,6 +264,17 @@ public class PixieEaseControlAnimator extends PixieAnimator {
 		invalidate();	
 	}
 
+	public void EaseToAlpha(int AlphaTarget, int EaseAlphaOverThisManyTicks, int EaseStyle) {
+		// Set up fade params
+		alpha_ease_target = AlphaTarget;
+		alpha_ease_start  = paint.getAlpha();
+		alpha_ease_tick   = 0;
+		alpha_ease_tickTo = EaseAlphaOverThisManyTicks;
+		alpha_ease_style  = EaseStyle;
+		
+		// Flag fade as go
+		isFading 	      = true;
+	}
 	public void EaseToFrameByIndex(int FrameIndex, int EaseOverThisManyTicks, int EaseStyle) {
 		// Set up ease params
 		ease_tick   	= 0;
@@ -168,7 +284,7 @@ public class PixieEaseControlAnimator extends PixieAnimator {
 		ease_style      = EaseStyle;
 		
 		// Flag ease as go
-		isEasing = true;
+		isEasing 		= true;
 	}
 	public void EaseToFrameByScalar(float Scalar, int EaseOverThisManyTicks, int EaseStyle) {
 		// Wtf is a scalar? A percent value without unit!

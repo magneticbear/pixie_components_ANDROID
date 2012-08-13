@@ -75,4 +75,13 @@
         android:onClick="onClick_100"
         android:text="100 %" />
 
-</RelativeLayout>
+    <com.magneticbear.pixie.PixieMultiColouredUsageIndicator
+        android:id="@+id/pixieMultiColouredUsageIndicator1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_0"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="49dp"
+        android:src="@drawable/rygb_usage_frames" />
+
+    </RelativeLayout>

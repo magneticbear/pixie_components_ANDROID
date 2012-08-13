@@ -3,6 +3,7 @@ package com.magneticbear.pixiedemo;
 
 
 import com.magneticbear.pixie.PixieEaseControlAnimator;
+import com.magneticbear.pixie.PixieMultiColouredUsageIndicator;
 
 import android.os.Bundle;
 import android.app.Activity;
