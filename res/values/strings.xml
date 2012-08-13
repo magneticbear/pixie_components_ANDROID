@@ -6,5 +6,6 @@
     <string name="title_activity_pixie_demo">PixieDemo</string>
     <string name="debug_button_text">Attempt Decode</string>
     <string name="welcome_to_pixie_text">Welcome to Pixie!\nWhy not try to decode an animation?</string>
+    <string name="explainer_animation">This little guy here is your standard animator.</string>
 
 </resources>

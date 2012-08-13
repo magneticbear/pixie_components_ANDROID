@@ -8,24 +8,71 @@
         android:id="@+id/pixieAnimator1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="179dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:src="@drawable/anim_sample_fat" />
 
-    <com.magneticbear.pixie.PixieAnimator
-        android:id="@+id/pixieAnimator3"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/circle_indicator_yellow" />
+        android:layout_above="@+id/pixieAnimator1"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:text="@string/explainer_animation" />
 
     <com.magneticbear.pixie.PixieEaseControlAnimator
         android:id="@+id/pixieEaseControlAnimator1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="137dp"
         android:src="@drawable/circle_indicator_blue" />
+
+    <Button
+        android:id="@+id/btn_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pixieEaseControlAnimator1"
+        android:layout_alignLeft="@+id/textView1"
+        android:onClick="onClick_0"
+        android:text="0 %" />
+
+    <Button
+        android:id="@+id/btn_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pixieEaseControlAnimator1"
+        android:layout_toRightOf="@+id/btn_0"
+        android:onClick="onClick_15"
+        android:text="15 %" />
+
+    <Button
+        android:id="@+id/btn_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_15"
+        android:layout_alignBottom="@+id/btn_15"
+        android:layout_toRightOf="@+id/btn_15"
+        android:onClick="onClick_50"
+        android:text="50 %" />
+
+    <Button
+        android:id="@+id/btn_85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pixieEaseControlAnimator1"
+        android:layout_toRightOf="@+id/btn_50"
+        android:onClick="onClick_85"
+        android:text="85 %" />
+
+    <Button
+        android:id="@+id/btn_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/pixieEaseControlAnimator1"
+        android:layout_toRightOf="@+id/btn_85"
+        android:onClick="onClick_100"
+        android:text="100 %" />
 
 </RelativeLayout>
