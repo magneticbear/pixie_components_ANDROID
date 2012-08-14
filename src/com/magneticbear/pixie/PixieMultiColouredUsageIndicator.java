@@ -125,7 +125,7 @@ public class PixieMultiColouredUsageIndicator extends PixieUsageIndicator {
 		invalidate();
 	}
 
-	public void SetUsagePercent(float Percect, int Color) {
+	public void SetUsagePercent(float Percent, int Color) {
 		/**
 		 *  Okay so some trickiness here. Because we can only pass just the one
 		 *  pixie sheet in as our constructor we can make some very cool assumptions.
@@ -166,10 +166,10 @@ public class PixieMultiColouredUsageIndicator extends PixieUsageIndicator {
 		}
 		
 		// Calculate the frame target for each color
-		int red_scalar    = (int)((layer_red_stride_scalar_end    - layer_red_stride_scalar_start)    * Percect) + layer_red_stride_scalar_start;
-		int yellow_scalar = (int)((layer_yellow_stride_scalar_end - layer_yellow_stride_scalar_start) * Percect) + layer_yellow_stride_scalar_start;
-		int green_scalar  = (int)((layer_green_stride_scalar_end  - layer_green_stride_scalar_start)  * Percect) + layer_green_stride_scalar_start;
-		int blue_scalar   = (int)((layer_blue_stride_scalar_end   - layer_blue_stride_scalar_start)   * Percect) + layer_blue_stride_scalar_start;
+		int red_scalar    = (int)((layer_red_stride_scalar_end    - layer_red_stride_scalar_start)    * Percent) + layer_red_stride_scalar_start;
+		int yellow_scalar = (int)((layer_yellow_stride_scalar_end - layer_yellow_stride_scalar_start) * Percent) + layer_yellow_stride_scalar_start;
+		int green_scalar  = (int)((layer_green_stride_scalar_end  - layer_green_stride_scalar_start)  * Percent) + layer_green_stride_scalar_start;
+		int blue_scalar   = (int)((layer_blue_stride_scalar_end   - layer_blue_stride_scalar_start)   * Percent) + layer_blue_stride_scalar_start;
 		
 		// Ease to the proper frame target
 		super.EaseToFrameByIndex(red_scalar,           EASE_SPEED, EASE_STYLE);
