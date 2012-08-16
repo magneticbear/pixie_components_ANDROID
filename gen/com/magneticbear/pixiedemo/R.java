@@ -14,9 +14,11 @@ public final class R {
         public static final int anim_sample_fat=0x7f020000;
         public static final int circle_indicator_blue=0x7f020001;
         public static final int circle_indicator_yellow=0x7f020002;
-        public static final int ic_action_search=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int rygb_usage_frames=0x7f020005;
+        public static final int dark=0x7f020003;
+        public static final int ic_action_search=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int rygb_usage_frames=0x7f020006;
+        public static final int spaceball=0x7f020007;
     }
     public static final class id {
         public static final int btn_0=0x7f070000;
@@ -24,7 +26,17 @@ public final class R {
         public static final int btn_15=0x7f070001;
         public static final int btn_50=0x7f070002;
         public static final int btn_85=0x7f070003;
-        public static final int menu_settings=0x7f07000e;
+        public static final int btn_invite_members=0x7f070017;
+        public static final int btn_logout=0x7f070012;
+        public static final int btn_notifications=0x7f070011;
+        public static final int btn_plan_settings=0x7f070014;
+        public static final int btn_refresh=0x7f07000f;
+        public static final int btn_row_0=0x7f070010;
+        public static final int btn_row_1=0x7f070013;
+        public static final int btn_row_2=0x7f070016;
+        public static final int btn_share=0x7f070018;
+        public static final int btn_submit_bug_report=0x7f070015;
+        public static final int menu_settings=0x7f070019;
         public static final int pixieEaseControlAnimator1=0x7f070005;
         public static final int pixieMultiColouredUsageIndicator1=0x7f070006;
         public static final int pixieMultiColouredUsageIndicator2=0x7f070007;
@@ -34,10 +46,12 @@ public final class R {
         public static final int pixieMultiColouredUsageIndicator6=0x7f07000b;
         public static final int pixieMultiColouredUsageIndicator7=0x7f07000c;
         public static final int pixieMultiColouredUsageIndicator8=0x7f07000d;
+        public static final int spaceball0=0x7f07000e;
     }
     public static final class layout {
         public static final int activity_pixie_demo=0x7f030000;
         public static final int activity_pixie_load_test=0x7f030001;
+        public static final int menu_custom=0x7f030002;
     }
     public static final class menu {
         public static final int activity_pixie_demo=0x7f060000;
